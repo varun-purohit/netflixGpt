@@ -1,11 +1,15 @@
+import Header from "./Header";
 import { useRef, useState } from "react";
-import logo from "../utils/logo.svg";
 import { formValidation } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 /*
 firebase data testing
@@ -14,6 +18,8 @@ firebase data testing
 const Login = () => {
   const [login, setLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const name = useRef(null);
   const email = useRef(null);
@@ -22,10 +28,12 @@ const Login = () => {
   function handleLogin() {
     const emailValue = email.current.value;
     const passwordValue = password.current.value;
+    // const nameValue = name.current.value;
+    // console.log(nameValue);
+
     const message = formValidation(emailValue, passwordValue);
 
     setErrorMessage(message);
-    console.log(message);
     if (message) return;
 
     if (login) {
@@ -35,7 +43,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          // ...
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -54,6 +62,23 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
           console.log(user);
+          updateProfile(user, {
+            displayName: name.current.value,
+          })
+            .then(() => {
+              const { uid, email, displayName } = auth;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -69,7 +94,8 @@ const Login = () => {
   }
   return (
     <div className="relative">
-      <div className="absolute top-[40%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-10">
+      <Header />
+      <div className="absolute top-[45%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-10">
         <form
           onSubmit={(e) => e.preventDefault()}
           className="  bg-black bg-opacity-80 py-12 px-16 text-white     rounded-md shadow  "
