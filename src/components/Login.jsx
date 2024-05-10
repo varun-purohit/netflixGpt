@@ -7,9 +7,8 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../store/slice/userSlice";
 
 /*
 firebase data testing
@@ -18,7 +17,6 @@ firebase data testing
 const Login = () => {
   const [login, setLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const name = useRef(null);
@@ -42,8 +40,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -74,7 +70,6 @@ const Login = () => {
                   displayName: displayName,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -95,10 +90,10 @@ const Login = () => {
   return (
     <div className="relative">
       <Header />
-      <div className="absolute top-[45%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-10">
+      <div className="absolute top-[45%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-10 w-[426px]">
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="  bg-black bg-opacity-80 py-12 px-16 text-white     rounded-md shadow  "
+          className="  bg-black bg-opacity-80 py-12 px-16 text-white  w-full   rounded-md shadow  "
         >
           <div className="text-white">
             <h1 className="text-xl mb-4 font-bold leading-tight tracking-[1px] text-white md:text-3xl">
