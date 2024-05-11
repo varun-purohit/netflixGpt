@@ -50,7 +50,7 @@ const Header = () => {
 
   return (
     <div className="text-white body-font fixed top-0 bg-gradient-to-b from-black w-full z-50">
-      <div className=" px-16 flex p-5  md:flex-row items-center justify-between">
+      <div className=" px-16 flex flex-col p-5  md:flex-row items-center justify-between">
         <a className="flex font-medium items-center text-white mb-4 md:mb-0">
           <img src={NETFLIX_LOGO} className="w-24 hover:underline" alt="logo" />
         </a>

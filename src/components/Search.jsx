@@ -6,13 +6,17 @@ import SearchBar from "./SearchBar";
 const Search = () => {
   return (
     <div className="">
-      <Header />
-      <div className="fixed -z-10">
-        <img className=" " src={BG_URL} alt="background" />
+      <div className="fixed sm:fixed  -z-10">
+        <img
+          className="h-screen object-cover  md:h-[100%] "
+          src={BG_URL}
+          alt="background"
+        />
       </div>
-
-      <SearchBar />
-      <MovieSuggestions />
+      <div className="">
+        <SearchBar />
+        <MovieSuggestions />
+      </div>
     </div>
   );
 };

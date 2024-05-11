@@ -92,7 +92,7 @@ const Login = () => {
       <div className="absolute top-[45%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-10 w-[426px]">
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="  bg-black bg-opacity-80 py-12 px-16 text-white  w-full   rounded-md shadow  "
+          className="  bg-black bg-opacity-80 py-12 px-16 text-white   w-full rounded-md shadow  "
         >
           <div className="text-white">
             <h1 className="text-xl mb-4 font-bold leading-tight tracking-[1px] text-white md:text-3xl">
@@ -151,7 +151,11 @@ const Login = () => {
 
       <div className="w-full h-screen">
         <div className=" h-full w-full bg-black opacity-30 absolute"></div>
-        <img className=" h-full w-full block " src={BG_URL} alt="background" />
+        <img
+          className=" h-full w-full block object-cover "
+          src={BG_URL}
+          alt="background"
+        />
       </div>
     </div>
   );

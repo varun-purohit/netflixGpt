@@ -52,9 +52,9 @@ const SearchBar = () => {
   }
 
   return (
-    <div className="pt-[10%] flex justify-center ">
+    <div className=" pt-[30%] md:pt-[10%] flex justify-center ">
       <form
-        className=" w-1/2 grid grid-cols-12  bg-black bg-opacity-45"
+        className=" w-3/4 md:w-1/2 grid grid-cols-12  bg-black bg-opacity-45"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
@@ -64,7 +64,7 @@ const SearchBar = () => {
           placeholder="What would you like to watch today?"
         />
         <button
-          className="py-2 px-4 my-[15px] mx-2 rounded col-span-3  bg-red-700 hover:bg-red-800"
+          className="py-2 px-2 sm:px-4 my-[15px] mx-2 rounded col-span-3  bg-red-700 hover:bg-red-800"
           onClick={handleGptSearch}
         >
           Search
