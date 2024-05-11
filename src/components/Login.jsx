@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/slice/userSlice";
+import { BG_URL } from "../utils/constants";
 
 /*
 firebase data testing
@@ -26,8 +27,6 @@ const Login = () => {
   function handleLogin() {
     const emailValue = email.current.value;
     const passwordValue = password.current.value;
-    // const nameValue = name.current.value;
-    // console.log(nameValue);
 
     const message = formValidation(emailValue, passwordValue);
 
@@ -152,11 +151,7 @@ const Login = () => {
 
       <div className="w-full h-screen">
         <div className=" h-full w-full bg-black opacity-30 absolute"></div>
-        <img
-          className=" h-full w-full block "
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/4d7bb476-6d8b-4c49-a8c3-7739fddd135c/deecf71d-7a47-4739-9e1a-31b6b0d55be7/IN-en-20240429-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="background"
-        />
+        <img className=" h-full w-full block " src={BG_URL} alt="background" />
       </div>
     </div>
   );

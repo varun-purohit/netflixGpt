@@ -7,11 +7,17 @@ import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../store/slice/userSlice";
 import { useDispatch } from "react-redux";
 import { NETFLIX_LOGO } from "../utils/constants";
+import { toggleGptSearch } from "../store/slice/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store?.gpt?.showGptSearch);
+
+  function handleSearch() {
+    dispatch(toggleGptSearch());
+  }
 
   function handleSignout() {
     signOut(auth)
@@ -50,9 +56,17 @@ const Header = () => {
         </a>
 
         {user && (
-          <button onClick={handleSignout} className="font-semibold text-base">
-            {"Sign out"}
-          </button>
+          <div>
+            <button
+              onClick={handleSearch}
+              className="bg-purple-600 py-1 px-2 mr-2 rounded hover:bg-purple-700"
+            >
+              {showGptSearch ? "Homepage" : "GPT Search"}
+            </button>
+            <button onClick={handleSignout} className="font-semibold text-base">
+              {"Sign out"}
+            </button>
+          </div>
         )}
       </div>
     </div>
